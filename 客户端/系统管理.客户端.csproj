@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{69E7709B-5046-4ED4-ACF8-3F32DA40AAEC}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>系统管理.客户端</RootNamespace>
+    <AssemblyName>系统管理.客户端</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\调试输出\系统管理\系统管理.客户端\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>K.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="INET3">
+      <HintPath>..\LIB\INET3.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\LIB\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Utility">
+      <HintPath>..\LIB\Utility.dll</HintPath>
+    </Reference>
+    <Reference Include="通用访问">
+      <HintPath>..\LIB\通用访问.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="命令行\F结束进程.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="命令行\F结束进程.Designer.cs">
+      <DependentUpon>F结束进程.cs</DependentUpon>
+    </Compile>
+    <Compile Include="命令行\F单独进程.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="命令行\F单独进程.Designer.cs">
+      <DependentUpon>F单独进程.cs</DependentUpon>
+    </Compile>
+    <Compile Include="监控\B业务日志.cs" />
+    <Compile Include="监控\B资源监控.cs" />
+    <Compile Include="监控\B链路监控.cs" />
+    <Compile Include="监控\B进程监控.cs" />
+    <Compile Include="监控\F进程监控.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="监控\F进程监控.Designer.cs">
+      <DependentUpon>F进程监控.cs</DependentUpon>
+    </Compile>
+    <Compile Include="监控\F资源监控.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="监控\F资源监控.Designer.cs">
+      <DependentUpon>F资源监控.cs</DependentUpon>
+    </Compile>
+    <Compile Include="监控\F链路监控.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="监控\F链路监控.Designer.cs">
+      <DependentUpon>F链路监控.cs</DependentUpon>
+    </Compile>
+    <Compile Include="监控\F进程监控_配置.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="监控\F进程监控_配置.Designer.cs">
+      <DependentUpon>F进程监控_配置.cs</DependentUpon>
+    </Compile>
+    <Compile Include="监控\F资源监控_配置.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="监控\F资源监控_配置.Designer.cs">
+      <DependentUpon>F资源监控_配置.cs</DependentUpon>
+    </Compile>
+    <Compile Include="监控\F链路监控_配置.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="监控\F链路监控_配置.Designer.cs">
+      <DependentUpon>F链路监控_配置.cs</DependentUpon>
+    </Compile>
+    <Compile Include="监控\M业务日志.cs" />
+    <Compile Include="监控\M资源状态.cs" />
+    <Compile Include="监控\M资源监控配置.cs" />
+    <Compile Include="监控\M进程监控配置.cs" />
+    <Compile Include="监控\M链路状态.cs" />
+    <Compile Include="监控\M链路监控配置.cs" />
+    <Compile Include="进程管理\B进程管理.cs" />
+    <Compile Include="F主窗口.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F主窗口.Designer.cs">
+      <DependentUpon>F主窗口.cs</DependentUpon>
+    </Compile>
+    <Compile Include="命令行\F命令行.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="命令行\F命令行.Designer.cs">
+      <DependentUpon>F命令行.cs</DependentUpon>
+    </Compile>
+    <Compile Include="命令行\B命令行.cs" />
+    <Compile Include="FTP\FFTP.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FTP\FFTP.Designer.cs">
+      <DependentUpon>FFTP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="F模块列表.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="F模块列表.Designer.cs">
+      <DependentUpon>F模块列表.cs</DependentUpon>
+    </Compile>
+    <Compile Include="监控\F监控主界面.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="监控\F监控主界面.Designer.cs">
+      <DependentUpon>F监控主界面.cs</DependentUpon>
+    </Compile>
+    <Compile Include="命令行\F输入参数.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="命令行\F输入参数.Designer.cs">
+      <DependentUpon>F输入参数.cs</DependentUpon>
+    </Compile>
+    <Compile Include="进程管理\F进程管理.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="进程管理\F进程管理.Designer.cs">
+      <DependentUpon>F进程管理.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FTP\BFTP.cs" />
+    <Compile Include="命令行\M命令.cs" />
+    <Compile Include="命令行\M输出.cs" />
+    <Compile Include="进程管理\M进程状态.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="F主窗口.resx">
+      <DependentUpon>F主窗口.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="命令行\F结束进程.resx">
+      <DependentUpon>F结束进程.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="命令行\F单独进程.resx">
+      <DependentUpon>F单独进程.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="命令行\F命令行.resx">
+      <DependentUpon>F命令行.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FTP\FFTP.resx">
+      <DependentUpon>FFTP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="F模块列表.resx">
+      <DependentUpon>F模块列表.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="监控\F进程监控.resx">
+      <DependentUpon>F进程监控.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="监控\F资源监控.resx">
+      <DependentUpon>F资源监控.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="监控\F链路监控.resx">
+      <DependentUpon>F链路监控.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="监控\F监控主界面.resx">
+      <DependentUpon>F监控主界面.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="命令行\F输入参数.resx">
+      <DependentUpon>F输入参数.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="监控\F进程监控_配置.resx">
+      <DependentUpon>F进程监控_配置.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="监控\F资源监控_配置.resx">
+      <DependentUpon>F资源监控_配置.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="监控\F链路监控_配置.resx">
+      <DependentUpon>F链路监控_配置.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="进程管理\F进程管理.resx">
+      <DependentUpon>F进程管理.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="K.ico" />
+    <None Include="Resources\事件.png" />
+    <None Include="Resources\提示.png" />
+    <None Include="Resources\退出.png" />
+    <None Include="Resources\编辑.png" />
+    <None Include="Resources\刷新.png" />
+    <None Include="Resources\K.png" />
+    <None Include="Resources\背景.png" />
+    <Content Include="设备列表.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="默认FTP目录.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="默认命令行.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
