@@ -69,7 +69,7 @@ namespace 系统管理.服务端
                         }
                         if (_状态.CPU告警 != __旧)
                         {
-                            on阈值告警(_状态.CPU告警 ? "CPU告警" : "CPU告警解除");
+                            on阈值告警((_状态.CPU告警 ? "CPU告警. " : "CPU告警解除. ") + string.Join(",", _状态.CPU使用率));
                         }
                     }
                     catch (Exception ex)
@@ -88,7 +88,7 @@ namespace 系统管理.服务端
                         }
                         if (_状态.内存告警 != __旧)
                         {
-                            on阈值告警(_状态.内存告警 ? "内存告警" : "内存告警解除");
+                            on阈值告警((_状态.内存告警 ? "内存告警. " : "内存告警解除. ") + string.Join(",", _状态.内存使用率));
                         }
                     }
                     catch (Exception ex)
