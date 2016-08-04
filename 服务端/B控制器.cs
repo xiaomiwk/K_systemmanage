@@ -56,7 +56,8 @@ namespace 系统管理.服务端
         public void 开启()
         {
             H业务日志.记录("系统", "开启");
-            _IT服务端.端口 = 8888;
+            //_IT服务端.端口 = 8888;
+            _IT服务端.端口 = int.Parse(System.Configuration.ConfigurationManager.AppSettings["端口号"]);
             _IT服务端.开启();
         }
 
