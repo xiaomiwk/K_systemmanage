@@ -12,6 +12,7 @@ using System.Diagnostics;
 using Utility.扩展;
 using System.Threading.Tasks;
 using System.Threading;
+using Utility.通用;
 
 namespace 系统管理.客户端
 {
@@ -45,6 +46,12 @@ namespace 系统管理.客户端
                 List<M进程状态> __状态列表 = null;
                 Action __UI执行 = () =>
                 {
+                    if (__状态列表 == null)
+                    {
+                        this.out列表.Items.Clear();
+                        _缓存.Clear();
+                        return;
+                    }
                     for (int i = 0; i < __状态列表.Count; i++)
                     {
                         var __状态 = __状态列表[i];
@@ -95,7 +102,14 @@ namespace 系统管理.客户端
                     catch (Exception)
                     {
                     }
-                    this.Invoke(new Action(__UI执行));
+                    try
+                    {
+                        this.Invoke(new Action(__UI执行));
+                    }
+                    catch (Exception ex)
+                    {
+                        H日志.记录异常(ex);
+                    }
                     Thread.Sleep(2000);
                 }
             });

@@ -50,9 +50,9 @@ namespace 系统管理.客户端
             {
                 var __进程名 = (string)row.Cells[0].Value;
                 var __描述 = (string)row.Cells[1].Value;
-                int? __CPU阈值 = string.IsNullOrEmpty((string)row.Cells[2].Value) ? (int?)null : int.Parse((string)row.Cells[2].Value);
-                int? __内存阈值 = string.IsNullOrEmpty((string)row.Cells[3].Value) ? (int?)null : int.Parse((string)row.Cells[3].Value);
-                int? __阈值次数 = string.IsNullOrEmpty((string)row.Cells[4].Value) ? (int?)null : int.Parse((string)row.Cells[4].Value);
+                int? __CPU阈值 = row.Cells[2].Value == null ? (int?)null : int.Parse(row.Cells[2].Value.ToString());
+                int? __内存阈值 = row.Cells[3].Value == null ? (int?)null : int.Parse(row.Cells[3].Value.ToString());
+                int? __阈值次数 = row.Cells[4].Value == null ? (int?)null : int.Parse(row.Cells[4].Value.ToString());
                 配置.列表.Add(new M进程监控明细 { 进程名 = __进程名, 描述 = __描述, CPU阈值 = __CPU阈值, 内存阈值 = __内存阈值, 阈值次数 = __阈值次数 });
             }
             this.ParentForm.DialogResult = DialogResult.OK;

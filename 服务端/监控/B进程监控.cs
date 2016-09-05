@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Utility.模式;
 using Utility.通用;
 
 namespace 系统管理.服务端
@@ -18,6 +19,10 @@ namespace 系统管理.服务端
         Dictionary<string, PerformanceCounter> _计数器缓存 = new Dictionary<string, PerformanceCounter>();
 
         object _锁 = new object();
+
+        Dictionary<string, H阈值告警<int>> _CPU阈值告警 = new Dictionary<string, H阈值告警<int>>();
+
+        Dictionary<string, H阈值告警<int>> _内存阈值告警 = new Dictionary<string, H阈值告警<int>>();
 
         public M进程监控配置 配置 { get; set; }
 
@@ -33,6 +38,7 @@ namespace 系统管理.服务端
                     {
                         if (配置.列表.Count == 0)
                         {
+                            _上次存在进程.Clear();
                             continue;
                         }
                         var __本次存在进程 = new List<M进程状态>();
@@ -74,6 +80,31 @@ namespace 系统管理.服务端
                                             __状态.线程数 = 获取线程数(__状态.Id, __状态.名称);
                                             __状态.CPU = 获取CPU使用率(__状态.Id, __状态.名称);
                                             __本次存在进程.Add(__状态);
+
+                                            if (k.内存阈值.HasValue)
+                                            {
+                                                if (!_内存阈值告警.ContainsKey(__状态.名称))
+                                                {
+                                                    _内存阈值告警[__状态.名称] = new H阈值告警<int>(k.内存阈值.Value, (a, b) => a.CompareTo(b), (__告警, __缓存) =>
+                                                    {
+                                                        on阈值告警(string.Format("进程 {0} 内存{1}，明细：{2}", __状态.名称, __告警 ? "告警" : "告警解除", string.Join(",", __缓存)));
+                                                    }, 10, 5);
+                                                }
+                                                _内存阈值告警[__状态.名称].阈值 = k.内存阈值.Value;
+                                                _内存阈值告警[__状态.名称].添加((int)(__状态.内存 / 1024 / 1024));
+                                            }                                            
+                                            if (k.CPU阈值.HasValue)
+                                            {
+                                                if (!_CPU阈值告警.ContainsKey(__状态.名称))
+                                                {
+                                                    _CPU阈值告警[__状态.名称] = new H阈值告警<int>(k.CPU阈值.Value, (a, b) => a.CompareTo(b), (__告警, __缓存) =>
+                                                    {
+                                                        on阈值告警(string.Format("进程 {0} CPU{1}，明细：{2}", __状态.名称, __告警 ? "告警" : "告警解除", string.Join(",", __缓存)));
+                                                    }, 10, 5);
+                                                }
+                                                _CPU阈值告警[__状态.名称].阈值 = k.CPU阈值.Value;
+                                                _CPU阈值告警[__状态.名称].添加((int)(__状态.CPU));
+                                            }
                                             q.Dispose();
                                         }
                                         catch (Exception ex)
@@ -183,10 +214,12 @@ namespace 系统管理.服务端
             }
             else
             {
-                if (Program.IsWindows) {
+                if (Program.IsWindows)
+                {
                     __计数器 = new PerformanceCounter("Process", "Working Set - Private", __实例名);
                 }
-                else {
+                else
+                {
                     __计数器 = new PerformanceCounter("Process", "Working Set", __实例名);
                 }
                 _计数器缓存[__标识] = __计数器;
@@ -210,6 +243,5 @@ namespace 系统管理.服务端
             }
             return (int)__计数器.NextValue();
         }
-
     }
 }

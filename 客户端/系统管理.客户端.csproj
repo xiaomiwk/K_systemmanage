@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\调试输出\系统管理\系统管理.客户端\</OutputPath>
+    <OutputPath>..\..\..\调试输出\系统管理\系统管理.客户端\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -35,11 +35,12 @@
     <ApplicationIcon>K.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="INET3">
-      <HintPath>..\LIB\INET3.dll</HintPath>
+    <Reference Include="INET">
+      <HintPath>..\..\..\调试输出\INET\INET.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\LIB\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\资源\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,11 +53,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Utility">
-      <HintPath>..\LIB\Utility.dll</HintPath>
-    </Reference>
-    <Reference Include="通用访问">
-      <HintPath>..\LIB\通用访问.dll</HintPath>
+    <Reference Include="Utility, Version=1.16.330.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\调试输出\Utility\Utility.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -251,6 +250,12 @@
     <Content Include="默认命令行.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\通用访问\通用访问.csproj">
+      <Project>{967f394c-945c-43da-a08d-b9b2c15c9646}</Project>
+      <Name>通用访问</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

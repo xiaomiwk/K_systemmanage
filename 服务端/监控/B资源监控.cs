@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Utility.模式;
 using Utility.通用;
 using 通用访问;
 
@@ -26,7 +27,9 @@ namespace 系统管理.服务端
 
         private M资源状态 _状态;
 
-        int _缓存次数 = 10;
+        H阈值告警<int> _CPU阈值告警;
+
+        H阈值告警<int> _内存阈值告警;
 
         public B资源监控(M资源监控配置 __配置)
         {
@@ -60,17 +63,18 @@ namespace 系统管理.服务端
                     try
                     {
                         var __CPU使用率 = 获取CPU使用率();
-                        _状态.CPU使用率.Enqueue(__CPU使用率);
-                        var __旧 = _状态.CPU告警;
-                        if (_状态.CPU使用率.Count > _缓存次数)
+                        if (_CPU阈值告警 == null)
                         {
-                            _状态.CPU使用率.Dequeue();
-                            _状态.CPU告警 = _状态.CPU使用率.Count(q => q >= 配置.CPU阈值) >= 配置.阈值次数;
+                            _CPU阈值告警 = new H阈值告警<int>(配置.CPU阈值, (a, b) => a.CompareTo(b), (__告警, __缓存) =>
+                            {
+                                _状态.CPU告警 = __告警;
+                                on阈值告警(string.Format("CPU{0}，明细：{1}", __告警 ? "告警" : "告警解除", string.Join(",", __缓存)));
+                            }, 10, 配置.阈值次数);
                         }
-                        if (_状态.CPU告警 != __旧)
-                        {
-                            on阈值告警((_状态.CPU告警 ? "CPU告警. " : "CPU告警解除. ") + string.Join(",", _状态.CPU使用率));
-                        }
+                        _CPU阈值告警.阈值 = 配置.CPU阈值;
+                        _CPU阈值告警.告警判定次数 = 配置.阈值次数;
+                        _CPU阈值告警.添加(__CPU使用率);
+                        _状态.CPU使用率 = _CPU阈值告警.缓存;
                     }
                     catch (Exception ex)
                     {
@@ -79,17 +83,18 @@ namespace 系统管理.服务端
                     try
                     {
                         var __内存使用率 = 获取内存使用率();
-                        _状态.内存使用率.Enqueue(__内存使用率);
-                        var __旧 = _状态.内存告警;
-                        if (_状态.内存使用率.Count > _缓存次数)
+                        if (_内存阈值告警 == null)
                         {
-                            _状态.内存使用率.Dequeue();
-                            _状态.内存告警 = _状态.内存使用率.Count(q => q >= 配置.内存阈值) >= 配置.阈值次数;
+                            _内存阈值告警 = new H阈值告警<int>(配置.内存阈值, (a, b) => a.CompareTo(b), (__告警, __缓存) =>
+                            {
+                                _状态.内存告警 = __告警;
+                                on阈值告警(string.Format("内存{0}，明细：{1}", __告警 ? "告警" : "告警解除", string.Join(",", __缓存)));
+                            }, 10, 配置.阈值次数);
                         }
-                        if (_状态.内存告警 != __旧)
-                        {
-                            on阈值告警((_状态.内存告警 ? "内存告警. " : "内存告警解除. ") + string.Join(",", _状态.内存使用率));
-                        }
+                        _内存阈值告警.阈值 = 配置.内存阈值;
+                        _内存阈值告警.告警判定次数 = 配置.阈值次数;
+                        _内存阈值告警.添加(__内存使用率);
+                        _状态.内存使用率 = _内存阈值告警.缓存;
                     }
                     catch (Exception ex)
                     {
